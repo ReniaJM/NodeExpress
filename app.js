@@ -9,9 +9,13 @@ const Book = require('./models/bookmodel');
 const port = process.env.PORT || 4000;
 
 app.route('/books')
-    .get ((reg,res) => {
-   const response = 'ghghhg';
-   res.json(response)
+    .get ((req,res) => {
+        Book.find((err,books) => {
+            if(err) {
+                return res.send(err);
+            }
+                return res.json(books)
+        });
 });
 
 app.use(express.json());
